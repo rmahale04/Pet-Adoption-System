@@ -1,7 +1,7 @@
 <%-- 
     Document   : view_vets
-    Created on : 9 Jun 2025, 12:15:24 am
-    Author     : RUSHANG MAHALE
+    Created on : 9 Jun 2025, 12:15:24 am
+    Author     : Ruchita Mahale
 --%>
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -22,7 +22,7 @@
             --success-color: #4CAF50;
             --warning-color: #ff9800;
             --danger-color: #f44336;
-            --vet-color: #ab47bc; /* Purple for veterinarians */
+            --vet-color: #1a4c96; /* blue for veterinarians */
             --light-bg: #f0f5ff;
             --white: #ffffff;
             --text-primary: #333;
@@ -205,10 +205,27 @@
             border-top: 4px solid var(--vet-color);
         }
 
+        .card-image-container {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            order: 1;
+            max-width: 300px;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+        }
+
         .vet-content {
             flex: 2;
             display: flex;
             flex-direction: column;
+            order: 2;
         }
 
         .card-header {
@@ -234,11 +251,12 @@
             border: 1px solid rgba(171, 71, 188, 0.2);
         }
 
-        .vet-info h3 {
-            font-size: 1.25rem;
+        .vet-info h2 {
+            font-size: 1.5rem;
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 0.5rem;
+            padding-right: 150px;
         }
 
         .card-body {
@@ -254,7 +272,7 @@
 
         .detail-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 0.75rem;
             font-size: 0.9rem;
         }
@@ -263,6 +281,7 @@
             width: 16px;
             color: var(--primary-color);
             flex-shrink: 0;
+            margin-top: 2px;
         }
 
         .detail-item .label {
@@ -274,22 +293,7 @@
         .detail-item .value {
             color: var(--text-secondary);
             flex: 1;
-        }
-
-        .card-image-container {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-            align-items: flex-start;
-        }
-
-        .card-image {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-            object-fit: cover;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
+            word-wrap: break-word;
         }
 
         .card-actions {
@@ -404,11 +408,23 @@
             }
 
             .card-image-container {
+                order: 1;
+                max-width: 100%;
                 justify-content: center;
             }
 
-            .card-image {
-                max-width: 100%;
+            .vet-content {
+                order: 2;
+            }
+
+            .vet-info h2 {
+                padding-right: 0;
+            }
+
+            .role-badge {
+                position: static;
+                align-self: flex-start;
+                margin-top: 0.5rem;
             }
         }
 
@@ -437,12 +453,19 @@
 
                 <h4>Specialization</h4>
                 <select name="specialization">
-                    <option value="">All Specializations</option>
-                    <option value="General Practice">General Practice</option>
-                    <option value="Surgery">Surgery</option>
-                    <option value="Dermatology">Dermatology</option>
-                    <option value="Dentistry">Dentistry</option>
-                    <option value="Cardiology">Cardiology</option>
+                    <option value="">All specializations</option>
+                    <option value="Small Animals">Small Animals</option>
+                    <option value="Exotic Animals">Exotic Animals</option>
+                    <option value="Small Animal Medicine">Small Animal Medicine</option>
+                    <option value="Avian Medicine">Avian Medicine</option>
+                    <option value="Vaccination & Preventive Care">Vaccination & Preventive Care</option>
+                    <option value="Surgery & Orthopedics">Surgery & Orthopedics</option>
+                </select>
+                
+                <h4>City</h4>
+                <select name="city">
+                    <option value="">Any city</option>
+                    <option value="Ahmedabad">Ahmedabad</option>
                 </select>
 
                 <h4>Area</h4>
@@ -463,16 +486,6 @@
                     <option value="Shahibaug">Shahibaug</option>
                     <option value="IIM Road">IIM Road</option>
                 </select>
-
-                <h4>City</h4>
-                <select name="city">
-                    <option value="">Any city</option>
-                    <option value="Ahmedabad">Ahmedabad</option>
-                    <option value="Surat">Surat</option>
-                    <option value="Vadodara">Vadodara</option>
-                    <option value="Rajkot">Rajkot</option>
-                </select>
-
                 <button type="submit">Apply Filter</button>
             </form>
         </div>
@@ -545,6 +558,12 @@
                             String extraInfo = rs.getString("extra_info");
                     %>
                     <div class="vet-card vet-card">
+                        <!-- Image Container - Left Side -->
+                        <div class="card-image-container">
+                            <img src='pet_image/<%= rs.getString("photo") %>' alt="Vet Image" class="card-image">
+                        </div>
+                        
+                        <!-- Content Container - Right Side -->
                         <div class="vet-content">
                             <div class="card-header">
                                 <div class="vet-info">
@@ -557,14 +576,6 @@
                             <div class="card-body">
                                 <div class="vet-details">
                                     <div class="detail-item">
-                                        <i class="fas fa-stethoscope"></i>
-                                        <span class="label">Specialization:</span>
-                                        <span class="value"><%= specializationValue != null ? specializationValue : "Not specified" %></span>
-                                    </div>
-                                    <div class="card-image-container">
-                                        <img src='pet_image/<%= rs.getString("photo") %>' alt="Vet Image" class="card-image">
-                                    </div>
-                                    <div class="detail-item">
                                         <i class="fas fa-clinic-medical"></i>
                                         <span class="label">Clinic:</span>
                                         <span class="value"><%= clinicName != null ? clinicName : "Not specified" %></span>
@@ -573,11 +584,6 @@
                                         <i class="fas fa-envelope"></i>
                                         <span class="label">Email:</span>
                                         <span class="value"><%= email %></span>
-                                    </div>
-                                    <div class="detail-item">
-                                        <i class="fas fa-phone"></i>
-                                        <span class="label">Contact:</span>
-                                        <span class="value"><%= contactNo != null ? contactNo : "Not specified" %></span>
                                     </div>
                                     <div class="detail-item">
                                         <i class="fas fa-map-marker-alt"></i>
