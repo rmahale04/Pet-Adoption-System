@@ -288,6 +288,24 @@ Through this project, I gained practical experience in:
 - Database Normalization
 
 ---
+## 📚 Project Documentation
+
+A detailed Software Engineering document is available, including:
+
+- Software Requirements Specification (SRS)
+- Requirement Gathering
+- Functional & Non-Functional Requirements
+- Use Case Diagram
+- DFD (Level 0 & Level 1)
+- ER Diagram
+- Database Schema
+- Database Tables
+- Test Cases
+- UI Screenshots
+- Development Process
+
+📄 **View Complete Documentation:**  
+[Pet Adoption System Documentation (PDF)](https://drive.google.com/file/d/1F6jABimPlGFo9bS4KJMcpZqPW9e3U89x/view?usp=sharing)
 ```
 👥 Contributors
 
