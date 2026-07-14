@@ -306,7 +306,8 @@ A detailed Software Engineering document is available, including:
 
 📄 **View Complete Documentation:**  
 [Pet Adoption System Documentation (PDF)](https://drive.google.com/file/d/1F6jABimPlGFo9bS4KJMcpZqPW9e3U89x/view?usp=sharing)
-```
+
+---
 👥 Contributors
 
 - Ruchita Mahale – [LinkedIn](https://www.linkedin.com/in/ruchita-mahale/) | [GitHub](https://github.com/rmahale04)
